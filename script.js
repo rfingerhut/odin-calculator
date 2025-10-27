@@ -34,7 +34,6 @@ function operate(a,b,opp){
 
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
-// let storedVals = [];
 let input ='';
 let storedAnswer = '';
 
@@ -50,7 +49,6 @@ function updateDisplay(str){
 }
 
 function storeValues(str){
-    // storedVals.push(str);
     input+=str;
 }
 
@@ -91,18 +89,3 @@ equalButton.addEventListener('click', () => {
     splitInput();
     input = '';
 });
-
-
-
-
-
-// const equalButton = document.querySelector('#equalButton');
-// equalButton.addEventListener('click', () => {
-//     num2 = Number(storedVals.pop());
-//     operator = storedVals.pop();
-//     num1 = Number(storedVals.pop());
-
-//     let answer = operate(num1, num2, operator);
-
-//     updateDisplay(answer)
-// })
