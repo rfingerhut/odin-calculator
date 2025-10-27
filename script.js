@@ -57,27 +57,20 @@ function splitInput(){
     let problem;
 
     if (input.includes('+')){
-        problem = input.split('+');
-        num2=Number(problem.pop());
-        num1=Number(problem.pop());
+        problem = input.split('+');     
         operator='+';
     } else if (input.includes('-')){
         problem = input.split('-');
-        num2=Number(problem.pop());
-        num1=Number(problem.pop());
         operator='-';
     } else if (input.includes('*')){
         problem = input.split('*');
-        num2=Number(problem.pop());
-        num1=Number(problem.pop());
         operator='*';
     } else if (input.includes('/')){
         problem = input.split('/');
-        num2=Number(problem.pop());
-        num1=Number(problem.pop());
         operator='/';
     }
-
+    num2=Number(problem.pop());
+    num1=Number(problem.pop());
     updateDisplay(operate(num1, num2, operator)); 
 }
 
