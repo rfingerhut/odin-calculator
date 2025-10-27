@@ -42,6 +42,12 @@
     width: 100%;
 }
 
+#equalButton{
+    border: 1px solid green;
+    height: 100%;
+    width: 100%;
+}
+
 #clearWrapper{
     flex: 1;
 }

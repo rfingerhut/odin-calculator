@@ -52,3 +52,13 @@ function storeValues(str){
     console.table(storedVals);
 }
 
+const equalButton = document.querySelector('#equalButton');
+equalButton.addEventListener('click', () => {
+    num2 = Number(storedVals.pop());
+    operator = storedVals.pop();
+    num1 = Number(storedVals.pop());
+
+    let answer = operate(num1, num2, operator);
+
+    updateDisplay(answer)
+})
