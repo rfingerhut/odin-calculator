@@ -31,3 +31,13 @@ function operate(a,b,opp){
     }
 }
 
+const display = document.querySelector('#outputContainer');
+const output = document.createElement('p');
+let storedVal;
+
+const calcButtons = document.querySelectorAll('.calculatorButton');
+calcButtons.forEach(el => el.addEventListener('click', () => {
+    storedVal = e.textContent;
+    output.textContent = el.textContent;
+    display.appendChild(output);
+}))
