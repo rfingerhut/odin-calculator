@@ -35,6 +35,7 @@ function operate(a,b,opp){
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
 let storedVals = [];
+let input =''
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
@@ -48,17 +49,57 @@ function updateDisplay(str){
 }
 
 function storeValues(str){
-    storedVals.push(str);
-    console.table(storedVals);
+    // storedVals.push(str);
+    input+=str;
 }
+
+function splitInput(){
+    let problem;
+
+    if (input.includes('+')){
+        problem = input.split('+');
+        num2=Number(problem.pop());
+        num1=Number(problem.pop());
+        operator='+';
+    } else if (input.includes('-')){
+        problem = input.split('-');
+        num2=Number(problem.pop());
+        num1=Number(problem.pop());
+        operator='-';
+    } else if (input.includes('*')){
+        problem = input.split('*');
+        num2=Number(problem.pop());
+        num1=Number(problem.pop());
+        operator='*';
+    } else if (input.includes('/')){
+        problem = input.split('/');
+        num2=Number(problem.pop());
+        num1=Number(problem.pop());
+        operator='/';
+    }
+
+    updateDisplay(operate(num1, num2, operator)); 
+}
+
+
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
-    num2 = Number(storedVals.pop());
-    operator = storedVals.pop();
-    num1 = Number(storedVals.pop());
+    splitInput();
+    input = '';
+});
 
-    let answer = operate(num1, num2, operator);
 
-    updateDisplay(answer)
-})
+
+
+
+// const equalButton = document.querySelector('#equalButton');
+// equalButton.addEventListener('click', () => {
+//     num2 = Number(storedVals.pop());
+//     operator = storedVals.pop();
+//     num1 = Number(storedVals.pop());
+
+//     let answer = operate(num1, num2, operator);
+
+//     updateDisplay(answer)
+// })
