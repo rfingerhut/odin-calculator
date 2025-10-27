@@ -14,9 +14,10 @@ function divide(a,b){
     return a/b;
 }
 
-let num1;
-let num2;
-let operator;
+
+let num1 = null;
+let num2 = null;
+let operator = null;
 
 function operate(a,b,opp){
     switch(opp){
@@ -33,11 +34,21 @@ function operate(a,b,opp){
 
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
-let storedVal;
+let storedVals = [];
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
-    storedVal = el.textContent;
-    output.textContent = el.textContent;
-    display.appendChild(output);
-}))
+    updateDisplay(el.textContent);
+    storeValues(el.textContent);
+}));
+
+function updateDisplay(str){
+    output.textContent = str;
+    display.appendChild(output);  
+}
+
+function storeValues(str){
+    storedVals.push(str);
+    console.table(storedVals);
+}
+
