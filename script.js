@@ -37,7 +37,7 @@ let storedVal;
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
-    storedVal = e.textContent;
+    storedVal = el.textContent;
     output.textContent = el.textContent;
     display.appendChild(output);
 }))
