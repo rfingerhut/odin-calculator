@@ -36,6 +36,7 @@ const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
 // let storedVals = [];
 let input ='';
+let storedAnswer = '';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
@@ -71,16 +72,18 @@ function splitInput(){
     }
     num2=Number(problem.pop());
     num1=Number(problem.pop());
-    updateDisplay(operate(num1, num2, operator)); 
+    storedAnswer = operate(num1, num2, operator);
+    updateDisplay(storedAnswer); 
 }
 
-function clearDisplay(){
+function clear(){
     output.textContent = '';
     input = '';
+    storedAnswer = '';
 }
 
 const clearButton = document.querySelector('#clearButton');
-clearButton.addEventListener('click', () => clearDisplay());
+clearButton.addEventListener('click', () => clear());
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
