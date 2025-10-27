@@ -34,8 +34,8 @@ function operate(a,b,opp){
 
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
-let storedVals = [];
-let input =''
+// let storedVals = [];
+let input ='';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
@@ -44,7 +44,7 @@ calcButtons.forEach(el => el.addEventListener('click', () => {
 }));
 
 function updateDisplay(str){
-    output.textContent = str;
+    output.textContent = output.textContent + ' ' + str;
     display.appendChild(output);  
 }
 
@@ -74,10 +74,17 @@ function splitInput(){
     updateDisplay(operate(num1, num2, operator)); 
 }
 
+function clearDisplay(){
+    output.textContent = '';
+    input = '';
+}
 
+const clearButton = document.querySelector('#clearButton');
+clearButton.addEventListener('click', () => clearDisplay());
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
+    output.textContent='';
     splitInput();
     input = '';
 });
