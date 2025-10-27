@@ -13,3 +13,21 @@ function multiply(a,b){
 function divide(a,b){
     return a/b;
 }
+
+let num1;
+let num2;
+let operator;
+
+function operate(a,b,opp){
+    switch(opp){
+        case '+':
+            return add(a,b);
+        case '-':
+            return subtract(a,b);
+        case '*':
+            return multiply(a,b);
+        case'/':
+            return divide(a,b);
+    }
+}
+
