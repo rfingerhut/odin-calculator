@@ -41,6 +41,15 @@ const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
     updateDisplay(el.textContent);
     storeValues(el.textContent);
+    if (!problem.firstNum){
+            problem.firstNum = Number(input);
+            console.log('first');
+            input='';
+        } else if (!problem.secondNum){
+            problem.secondNum = Number(input);
+            console.log(problem.secondNum);
+            input = '';
+        }
 }));
 
 function updateDisplay(str){
@@ -50,28 +59,6 @@ function updateDisplay(str){
 
 function storeValues(str){
     input+=str;
-}
-
-function splitInput(){
-    let problem;
-
-    if (input.includes('+')){
-        problem = input.split('+');     
-        operator='+';
-    } else if (input.includes('-')){
-        problem = input.split('-');
-        operator='-';
-    } else if (input.includes('*')){
-        problem = input.split('*');
-        operator='*';
-    } else if (input.includes('/')){
-        problem = input.split('/');
-        operator='/';
-    }
-    num2=Number(problem.pop());
-    num1=Number(problem.pop());
-    storedAnswer = operate(num1, num2, operator);
-    updateDisplay(storedAnswer); 
 }
 
 function clear(){
@@ -85,18 +72,9 @@ clearButton.addEventListener('click', () => clear());
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
-    output.textContent='';
-    splitInput();
-    input = '';
+    answer = operate(problem.firstNum, problem.secondNum, problem.operator);
+    updateDisplay(answer);
 });
-
-// when an operator button is pressed, do a calculation and then store the answer.
-// if it's an object ... problem would have properties: firstNum, operator, secondNum, and.. answer?
-// for each operator button is pressed, then you would have to check if a firstNum or secondNum exist?
-// problem.firstNum = 12 problem.operator = + problem.secondNum = 7 
-// if the minus button is pressed...
-// if there's a second number already, do the calculation. First number is only stored once the operator button is pressed.
-// operator button press: checks for first number, if no first number, assign it (need to store input as a concactonated string.) If there is not a firstNum, through an error. If there is a firstNum, check if secondNum exists. If secondNum does not exist, then continue with input collecting (no calculation). If a secondNum does exist, do the calculation using problem.firstNum, problem.operator, and problem.secondNum. Then, assign problem.operator with the current button that was pressed. Assign problem.FirstNum as the result from the calculation().
 
 const problem = {
     firstNum:null,
@@ -107,27 +85,29 @@ const problem = {
 
 const operatorButton = document.querySelectorAll('.operatorButton');
 operatorButton.forEach( el => el.addEventListener('click', () => {
-    let answer = '';
-    if (!problem.firstNum || !problem.operator || !problem.secondNum){
+    let currOperator = el.textContent;
+    (!problem.operator) ? problem.operator = currOperator : "";
+    if (problem.firstNum && problem.secondNum){
+        updateDisplay(doCalculation(currOperator)); 
+    } else {
         if (!problem.firstNum){
             problem.firstNum = Number(input);
+            console.log('first');
             input='';
-            console.log('first number assigned: ' + problem.firstNum);
         } else if (!problem.secondNum){
             problem.secondNum = Number(input);
+            console.log(problem.secondNum);
             input = '';
-            console.log('second number assigned: ' + problem.secondNum);
+           updateDisplay(doCalculation(currOperator));
         }
-        if (!problem.operator){
-            problem.operator = el.textContent;
-            console.log('operator assigned: ' + problem.operator);
-        }  
-    }  
-    if (problem.firstNum && problem.operator && problem.secondNum){
-        answer = operate(problem.firstNum, problem.secondNum, problem.operator);
-        console.log(`Answer = ${answer}`);
-        problem.firstNum = answer;
-        problem.operator = null;
-        problem.secondNum = null;  
-    }
+    } 
 }));
+
+function doCalculation(currOperator){
+    answer = operate(problem.firstNum, problem.secondNum, problem.operator)
+        console.log(problem.firstNum + " " + problem.operator + " " + problem.secondNum);
+        problem.firstNum = answer;
+        problem.operator = currOperator;
+        problem.secondNum = null; 
+    return answer;
+}
