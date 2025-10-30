@@ -14,10 +14,13 @@ function divide(a,b){
     return a/b;
 }
 
+const problem = {
+    firstNum:null,
+    secondNum:null,
+    operator:null,
+    prevOperator: null,
+}
 
-let num1 = null;
-let num2 = null;
-let operator = null;
 
 function operate(a,b,opp){
     switch(opp){
@@ -35,21 +38,17 @@ function operate(a,b,opp){
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
 let input ='';
-let storedAnswer = '';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
     updateDisplay(el.textContent);
     storeValues(el.textContent);
     if (!problem.firstNum){
-            problem.firstNum = Number(input);
-            console.log('first');
-            input='';
-        } else if (!problem.secondNum){
-            problem.secondNum = Number(input);
-            console.log(problem.secondNum);
-            input = '';
-        }
+        problem.firstNum = Number(input);
+    } else if (!problem.secondNum){
+        problem.secondNum = Number(input);
+    }
+    console.log(problem);
 }));
 
 function updateDisplay(str){
@@ -62,50 +61,50 @@ function storeValues(str){
 }
 
 function clear(){
+    clearDisplay();
+    problem.firstNum = null;
+    problem.secondNum = null;
+    problem.operator = null;
+}
+
+function clearDisplay(){
     output.textContent = '';
     input = '';
     storedAnswer = '';
 }
+
 
 const clearButton = document.querySelector('#clearButton');
 clearButton.addEventListener('click', () => clear());
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
-    answer = operate(problem.firstNum, problem.secondNum, problem.operator);
-    updateDisplay(answer);
+    equals();
 });
 
-const problem = {
-    firstNum:null,
-    secondNum:null,
-    operator:null,
+function equals(){
+    clearDisplay();
+    answer = operate(problem.firstNum, problem.secondNum, problem.prevOperator);
+    problem.firstNum = answer;
+    problem.secondNum = null;
+    updateDisplay(answer);
 }
 
 
 const operatorButton = document.querySelectorAll('.operatorButton');
 operatorButton.forEach( el => el.addEventListener('click', () => {
-    let currOperator = el.textContent;
-    (!problem.operator) ? problem.operator = currOperator : "";
+    problem.operator = el.textContent;
+    input = '';
+    updateDisplay(el.textContent);
+    (!problem.prevOperator) ? problem.prevOperator = problem.operator : "";
     if (problem.firstNum && problem.secondNum){
-        updateDisplay(doCalculation(currOperator)); 
-    } else {
-        if (!problem.firstNum){
-            problem.firstNum = Number(input);
-            console.log('first');
-            input='';
-        } else if (!problem.secondNum){
-            problem.secondNum = Number(input);
-            console.log(problem.secondNum);
-            input = '';
-           updateDisplay(doCalculation(currOperator));
-        }
-    } 
+        equals(); 
+    }
+    problem.operator = null;
 }));
 
 function doCalculation(currOperator){
     answer = operate(problem.firstNum, problem.secondNum, problem.operator)
-        console.log(problem.firstNum + " " + problem.operator + " " + problem.secondNum);
         problem.firstNum = answer;
         problem.operator = currOperator;
         problem.secondNum = null; 
