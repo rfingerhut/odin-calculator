@@ -36,7 +36,6 @@ function operate(a,b,opp){
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
 let input ='';
-let answer = '';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
@@ -47,7 +46,6 @@ calcButtons.forEach(el => el.addEventListener('click', () => {
 
 function updateDisplay(str){
     output.textContent = output.textContent + ' ' + str;
-    console.log(str);
     display.appendChild(output);  
 }
 
@@ -65,7 +63,6 @@ function clear(){
 function clearDisplay(){
     output.textContent = '';
     input = '';
-    storedAnswer = '';
 }
 
 
