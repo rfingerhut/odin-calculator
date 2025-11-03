@@ -45,6 +45,12 @@
     text-align:right;
     width: 100%;
 }
+
+#outputContainer p.shrink{
+    font-size: 2vw;
+    text-align: center;
+}
+
 #calculatorButtonsContainer{
     display: flex;
     flex-direction: column;

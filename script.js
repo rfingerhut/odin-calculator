@@ -74,6 +74,9 @@ clearButton.addEventListener('click', () => clear());
 
 function clear(){
     clearDisplay();
+    if (output.classList.contains("shrink")) {
+        output.classList.remove("shrink");
+    }
     problem.firstNum = null;
     problem.secondNum = null;
     problem.prevOperator = null;
@@ -105,7 +108,8 @@ function equals(){
 
     // When result is NOT an actual number, like NaN (when dividing by zero):
     } else {
-        updateDisplay('ERROR! Press the clear button to continue.');
+        updateDisplay('ERROR! Press AC to continue.');
+        output.classList.add('shrink');
         problem.firstNum = null;
         problem.secondNum = null;
         problem.prevOperator = null;
