@@ -29,6 +29,7 @@ function operate(a,b,opp){
         case '*':
             return multiply(a,b);
         case'/':
+            if (b === 0) return null;
             return divide(a,b);
     }
 }
@@ -75,7 +76,7 @@ equalButton.addEventListener('click', () => {
 });
 
 function equals(){
-    problem.secondNum = Number(input);
+    problem.secondNum = Number(input) || 0;
     clearDisplay();
     result = operate(problem.firstNum, problem.secondNum, problem.prevOperator);
 
@@ -84,7 +85,7 @@ function equals(){
         problem.secondNum = null;
         updateDisplay(result);
     } else {
-        updateDisplay(result);
+        updateDisplay('can\'t work');
         problem.firstNum = null;
         problem.secondNum = null;
         problem.prevOperator = null;
@@ -102,7 +103,7 @@ function handleOperatorButtonClick(el){
     if (problem.firstNum === null) {
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
-        updateDisplay(problem.firstNum + ' ' + newOperator);
+        (problem.firstNum === 0) ? updateDisplay(problem.firstNum + ' ' + newOperator): updateDisplay(newOperator);
         input = '';
         return;
     }
