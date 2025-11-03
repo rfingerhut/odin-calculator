@@ -107,7 +107,7 @@ function handleOperatorButtonClick(el){
         return;
     }
     if (input !== ''){
-        problem.secondNum = Number(input);
+        problem.secondNum = Number(input) || 0;
         equals();
     }
 
