@@ -18,6 +18,7 @@ const problem = {
     firstNum:null,
     secondNum:null,
     prevOperator: null,
+    error: false,
 }
 
 function operate(a,b,opp){
@@ -29,7 +30,10 @@ function operate(a,b,opp){
         case '*':
             return multiply(a,b);
         case'/':
-            if (b === 0) return null;
+            if (b === 0) {
+                problem.error = true; 
+                return null;
+            }
             return divide(a,b);
     }
 }
@@ -40,9 +44,11 @@ let input ='';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
-    let temp = el.textContent;
-    updateDisplay(el.textContent);
-    storeValues(temp);
+    if (problem.error == false) {
+        let temp = el.textContent;
+        updateDisplay(el.textContent);
+        storeValues(temp);
+    }
 }));
 
 function updateDisplay(str){
@@ -58,6 +64,7 @@ function clear(){
     clearDisplay();
     problem.firstNum = null;
     problem.secondNum = null;
+    problem.error = false;
 }
 
 
@@ -72,7 +79,7 @@ clearButton.addEventListener('click', () => clear());
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
-    equals();
+    if (problem.error === false) equals();
 });
 
 function equals(){
@@ -85,7 +92,7 @@ function equals(){
         problem.secondNum = null;
         updateDisplay(result);
     } else {
-        updateDisplay('can\'t work');
+        updateDisplay('ERROR! Can\'t divide by zero. Press the clear button to continue.');
         problem.firstNum = null;
         problem.secondNum = null;
         problem.prevOperator = null;
@@ -95,7 +102,7 @@ function equals(){
 
 
 const operatorButton = document.querySelectorAll('.operatorButton');
-operatorButton.forEach( el => el.addEventListener('click', () => handleOperatorButtonClick(el)));
+operatorButton.forEach( el => el.addEventListener('click', () => {if (problem.error == false) handleOperatorButtonClick(el)}));
 
 function handleOperatorButtonClick(el){
     const newOperator = el.textContent;
