@@ -1,3 +1,11 @@
+const problem = {
+    firstNum:null,
+    secondNum:null,
+    prevOperator: null,
+    error: false,
+}
+
+
 function add(a,b){
     return a+b;
 }
@@ -12,13 +20,6 @@ function multiply(a,b){
 
 function divide(a,b){
     return a/b;
-}
-
-const problem = {
-    firstNum:null,
-    secondNum:null,
-    prevOperator: null,
-    error: false,
 }
 
 function operate(a,b,opp){
@@ -43,13 +44,15 @@ const output = document.createElement('p');
 let input ='';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
-calcButtons.forEach(el => el.addEventListener('click', () => {
+calcButtons.forEach(el => el.addEventListener('click', () => handleCalcButtonClick(el)));
+
+function handleCalcButtonClick(el) {
     if (problem.error == false) {
         let temp = el.textContent;
         updateDisplay(el.textContent);
         storeValues(temp);
     }
-}));
+}
 
 function updateDisplay(str){
     output.textContent = output.textContent + ' ' + str;
@@ -60,6 +63,9 @@ function storeValues(str){
     input+=str;
 }
 
+const clearButton = document.querySelector('#clearButton');
+clearButton.addEventListener('click', () => clear());
+
 function clear(){
     clearDisplay();
     problem.firstNum = null;
@@ -67,15 +73,10 @@ function clear(){
     problem.error = false;
 }
 
-
 function clearDisplay(){
     output.textContent = '';
     input = '';
 }
-
-
-const clearButton = document.querySelector('#clearButton');
-clearButton.addEventListener('click', () => clear());
 
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
@@ -99,7 +100,6 @@ function equals(){
         input = '';
     }
 }
-
 
 const operatorButton = document.querySelectorAll('.operatorButton');
 operatorButton.forEach( el => el.addEventListener('click', () => {if (problem.error == false) handleOperatorButtonClick(el)}));
