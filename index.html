@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
-    <title>Calculator</title>
-</head>
-<body>
-    <div id="calculatorBody">
-        <div id="outputContainer">
-            <p></p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js" defer></script>
+        <title>Calculator</title>
+    </head>
+    <body>
+        <div class="mainContainer">
+            <div class="gutter"></div>
+            <div id="calculatorBody">
+                <div id="outputContainer">
+                    <p></p>
+                </div>
+                <div id="calculatorButtonsContainer">
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton" id="oneButton">1</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton" id="twoButton">2</button>
+                    </div>
+                    <div class="calculatorButtonWrapper" id="clearWrapper">
+                        <button id="clearButton">Clear</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton" id="threeButton">3</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton" id="fourButton">4</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="operatorButton" id="addButton">+</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton">5</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton">6</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="operatorButton">-</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton">7</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton">8</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="operatorButton">*</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="calculatorButton">9</button>
+                    </div>
+                    <div class="calculatorButtonWrapper" id="zeroWrapper">
+                        <button class="calculatorButton">0</button>
+                    </div>
+                    <div class="calculatorButtonWrapper">
+                        <button class="operatorButton" id="divide">/</button>
+                    </div>
+                    <div class="calculatorButtonWrapper" id="equalWrapper">
+                        <button id="equalButton">=</button>
+                    </div>
+                </div>
+            </div>
+            <div class="gutter"></div>
         </div>
-        <div id="calculatorButtonsContainer">
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton" id="oneButton">1</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton" id="twoButton">2</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="operatorButton" id="addButton">+</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton" id="threeButton">3</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton" id="fourButton">4</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="operatorButton">-</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton">5</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton">6</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="operatorButton">*</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton">7</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton">8</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="operatorButton" id="divide">/</button>
-            </div>
-            <div class="calculatorButtonWrapper">
-                <button class="calculatorButton">9</button>
-            </div>
-            <div class="calculatorButtonWrapper" id="zeroWrapper">
-                <button class="calculatorButton">0</button>
-            </div>
-            <div class="calculatorButtonWrapper" id="equalWrapper">
-                <button id="equalButton">=</button>
-            </div>
-            <div class="calculatorButtonWrapper" id="clearWrapper">
-                <button id="clearButton">Clear</button>
-            </div>
-
-
-        </div>
-    </div>
-</body>
+    </body>
 </html>
