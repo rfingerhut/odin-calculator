@@ -89,22 +89,22 @@ function equals(){
 
 
 const operatorButton = document.querySelectorAll('.operatorButton');
-operatorButton.forEach( el => el.addEventListener('click', () => {
+operatorButton.forEach( el => el.addEventListener('click', () => handleOperatorButtonClick(el)));
+
+function handleOperatorButtonClick(el){
     problem.operator = el.textContent;
     updateDisplay(el.textContent);
-    (!problem.prevOperator) ? problem.prevOperator = problem.operator : "";
-    if (!problem.firstNum || !problem.secondNum) {
-        if (!answer && !problem.firstNum){
+
+    if (!problem.prevOperator) problem.prevOperator = problem.operator;
+
+    if (!problem.firstNum) {
             problem.firstNum = Number(input)
-        } else {
-            problem.secondNum = Number(input);
-            equals();
-            updateDisplay(el.textContent);
-        }
+    } else {
+        problem.secondNum = Number(input);
+        equals();
+        updateDisplay(el.textContent);
     }
-    (problem.firstNum && problem.secondNum) ? equals() : '';
     problem.prevOperator = problem.operator;
     problem.operator = null;
     input = '';
-}));
-
+}
