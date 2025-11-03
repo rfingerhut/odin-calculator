@@ -17,7 +17,6 @@ function divide(a,b){
 const problem = {
     firstNum:null,
     secondNum:null,
-    // operator:null,
     prevOperator: null,
 }
 
@@ -60,7 +59,6 @@ function clear(){
     clearDisplay();
     problem.firstNum = null;
     problem.secondNum = null;
-    // problem.operator = null;
 }
 
 
