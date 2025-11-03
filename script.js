@@ -125,8 +125,11 @@ function handleOperatorButtonClick(el){
         let displayText = output.textContent.trim();
         console.log(displayText);
 
+        // When last character of the display is already an operator:
         if (['+', '-', '*', '/'].includes(displayText.slice(-1))) {
             displayText = displayText.slice(0, -1) + newOperator;
+        
+        // When last character is NOT an operator:
         } else {
             displayText += ' ' + newOperator;
         }
@@ -137,10 +140,12 @@ function handleOperatorButtonClick(el){
         return;
     }
     
-    // When oeprator button pressed before firstNum as been assigned:
+    // When operator button pressed before firstNum as been assigned:
     if (problem.firstNum === null) {
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
+
+        // When zero has been assigned to firstNum:
         (problem.firstNum === 0) ? updateDisplay(problem.firstNum + ' ' + newOperator): updateDisplay(newOperator);
         input = '';
         return;
