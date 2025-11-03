@@ -48,6 +48,7 @@ calcButtons.forEach(el => el.addEventListener('click', () => {
 
 function updateDisplay(str){
     output.textContent = output.textContent + ' ' + str;
+    console.log(str);
     display.appendChild(output);  
 }
 
@@ -61,6 +62,7 @@ function clear(){
     problem.secondNum = null;
     problem.operator = null;
 }
+
 
 function clearDisplay(){
     output.textContent = '';
@@ -80,11 +82,19 @@ equalButton.addEventListener('click', () => {
 function equals(){
     problem.secondNum = Number(input);
     clearDisplay();
-    answer = operate(problem.firstNum, problem.secondNum, problem.prevOperator);
-    problem.firstNum = answer;
-    problem.secondNum = null;
-    console.log(problem.secondNum);
-    updateDisplay(answer);
+    result = operate(problem.firstNum, problem.secondNum, problem.prevOperator);
+
+    if (typeof result === 'number' && !isNaN(result)){
+        problem.firstNum = result;
+        problem.secondNum = null;
+        updateDisplay(result);
+    } else {
+        updateDisplay(result);
+        problem.firstNum = null;
+        problem.secondNum = null;
+        problem.prevOperator = null;
+        input = '';
+    }
 }
 
 
@@ -92,19 +102,21 @@ const operatorButton = document.querySelectorAll('.operatorButton');
 operatorButton.forEach( el => el.addEventListener('click', () => handleOperatorButtonClick(el)));
 
 function handleOperatorButtonClick(el){
-    problem.operator = el.textContent;
-    updateDisplay(el.textContent);
-
-    if (!problem.prevOperator) problem.prevOperator = problem.operator;
+    const newOperator = el.textContent;
 
     if (!problem.firstNum) {
-            problem.firstNum = Number(input)
-    } else {
+        problem.firstNum = Number(input) || 0;
+        problem.prevOperator = newOperator;
+        updateDisplay(newOperator);
+        input = '';
+        return;
+    }
+    if (input !== ''){
         problem.secondNum = Number(input);
         equals();
-        updateDisplay(el.textContent);
     }
-    problem.prevOperator = problem.operator;
-    problem.operator = null;
+    
+    problem.prevOperator = newOperator;
     input = '';
+    updateDisplay(newOperator);
 }
