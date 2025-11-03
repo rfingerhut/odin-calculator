@@ -107,6 +107,18 @@ operatorButton.forEach( el => el.addEventListener('click', () => {if (problem.er
 function handleOperatorButtonClick(el){
     const newOperator = el.textContent;
 
+    if (input=='' && problem.prevOperator !== null){
+        let toReplace = problem.prevOperator;
+        problem.prevOperator = newOperator;
+
+        let updatedStr = output.textContent.replace(toReplace, newOperator);
+        output.remove();
+        output.textContent = updatedStr;
+
+        updateDisplay('');
+        return;
+    }
+    
     if (problem.firstNum === null) {
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
