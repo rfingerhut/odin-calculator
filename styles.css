@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+.gutter{
+    
+}
+
 #calculatorBody{
     border: 2px solid black;
     display: flex;
@@ -48,6 +52,6 @@
     width: 100%;
 }
 
-#clearWrapper{
+#equalWrapper{
     flex: 1;
 }
