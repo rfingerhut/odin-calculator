@@ -21,7 +21,6 @@ const problem = {
     prevOperator: null,
 }
 
-
 function operate(a,b,opp){
     switch(opp){
         case '+':
@@ -38,17 +37,13 @@ function operate(a,b,opp){
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
 let input ='';
+let answer = '';
 
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => {
+    let temp = el.textContent;
     updateDisplay(el.textContent);
-    storeValues(el.textContent);
-    if (!problem.firstNum){
-        problem.firstNum = Number(input);
-    } else if (!problem.secondNum){
-        problem.secondNum = Number(input);
-    }
-    console.log(problem);
+    storeValues(temp);
 }));
 
 function updateDisplay(str){
@@ -83,10 +78,12 @@ equalButton.addEventListener('click', () => {
 });
 
 function equals(){
+    problem.secondNum = Number(input);
     clearDisplay();
     answer = operate(problem.firstNum, problem.secondNum, problem.prevOperator);
     problem.firstNum = answer;
     problem.secondNum = null;
+    console.log(problem.secondNum);
     updateDisplay(answer);
 }
 
@@ -94,19 +91,20 @@ function equals(){
 const operatorButton = document.querySelectorAll('.operatorButton');
 operatorButton.forEach( el => el.addEventListener('click', () => {
     problem.operator = el.textContent;
-    input = '';
     updateDisplay(el.textContent);
     (!problem.prevOperator) ? problem.prevOperator = problem.operator : "";
-    if (problem.firstNum && problem.secondNum){
-        equals(); 
+    if (!problem.firstNum || !problem.secondNum) {
+        if (!answer && !problem.firstNum){
+            problem.firstNum = Number(input)
+        } else {
+            problem.secondNum = Number(input);
+            equals();
+            updateDisplay(el.textContent);
+        }
     }
+    (problem.firstNum && problem.secondNum) ? equals() : '';
+    problem.prevOperator = problem.operator;
     problem.operator = null;
+    input = '';
 }));
 
-function doCalculation(currOperator){
-    answer = operate(problem.firstNum, problem.secondNum, problem.operator)
-        problem.firstNum = answer;
-        problem.operator = currOperator;
-        problem.secondNum = null; 
-    return answer;
-}
