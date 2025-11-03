@@ -2,12 +2,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 #mainContainer{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .gutter{
@@ -16,29 +18,40 @@
 
 #calculatorBody{
     border: 2px solid black;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.297);
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+    background-color: black;
+    padding: 4% 4%;
+    border-radius: 20px;
 }
 
 #outputContainer{
-    border:2px solid blue;
     width: 100%;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* padding: 5%; */
 }
 
-
+#outputContainer p {
+    color: white;
+    font-size: 24px;
+    text-align:right;
+    width: 100%;
+}
 #calculatorButtonsContainer{
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 100%;
     height: 100%;
+    /* padding: 5%; */
+    gap: 8px;
 }
 
 .row{
@@ -46,11 +59,11 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .calculatorButtonWrapper{
-    border: 1px solid purple;
-    flex: 0 0 33.333%;
+    flex: 0 0 25%;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -58,19 +71,34 @@
 }
 
 .calculatorButton, .operatorButton, #clearButton{
-    border: 1px solid green;
     aspect-ratio: 1 / 1;
-    width: 50%;
+    width: 100%;
     border-radius: 50%;
+    border: none;
+}
+
+button{
+    color: white;
+    font-size: 18px;
+}
+
+.calculatorButton{
+    background-color: gray;
+}
+
+.operatorButton, #clearButton, #equalButton{
+    background-color: orange;
 }
 
 #equalButton{
-    border: 1px solid green;
-    height: 100%;
+    height: 50%;
+    padding: 5% 0;
     width: 100%;
+    border: none;
+    border-radius: 20px;
 }
 
 #equalWrapper{
     flex: 1;
-    height: 100%;
+    max-height: fit-content;
 }
