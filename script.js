@@ -102,7 +102,7 @@ function handleOperatorButtonClick(el){
     if (problem.firstNum === null) {
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
-        updateDisplay(newOperator);
+        updateDisplay(problem.firstNum + ' ' + newOperator);
         input = '';
         return;
     }
