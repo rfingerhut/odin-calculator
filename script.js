@@ -5,7 +5,7 @@ const problem = {
     error: false,
 }
 
-
+// ****** DOING THE CALCULATIONS FUNCTIONS ******
 function add(a,b){
     return a+b;
 }
@@ -39,14 +39,23 @@ function operate(a,b,opp){
     }
 }
 
+// ****** UPDATING THE DISPLAY ******
 const display = document.querySelector('#outputContainer');
 const output = document.createElement('p');
 let input ='';
 
+function updateDisplay(str){
+    output.textContent = output.textContent + ' ' + str;
+    display.appendChild(output);  
+}
+
+
+// ****** CALC BUTTON HANDLING ******
 const calcButtons = document.querySelectorAll('.calculatorButton');
 calcButtons.forEach(el => el.addEventListener('click', () => handleCalcButtonClick(el)));
 
 function handleCalcButtonClick(el) {
+    // When the calculator is not in an error state from dividing by zero: 
     if (problem.error == false) {
         let temp = el.textContent;
         updateDisplay(el.textContent);
@@ -54,15 +63,12 @@ function handleCalcButtonClick(el) {
     }
 }
 
-function updateDisplay(str){
-    output.textContent = output.textContent + ' ' + str;
-    display.appendChild(output);  
-}
-
 function storeValues(str){
     input+=str;
 }
 
+
+// ****** CLEAR BUTTON HANDLING ******
 const clearButton = document.querySelector('#clearButton');
 clearButton.addEventListener('click', () => clear());
 
@@ -78,6 +84,8 @@ function clearDisplay(){
     input = '';
 }
 
+
+// ****** EQUAL BUTTON HANDLING ******
 const equalButton = document.querySelector('#equalButton');
 equalButton.addEventListener('click', () => {
     if (problem.error === false) equals();
@@ -88,10 +96,13 @@ function equals(){
     clearDisplay();
     result = operate(problem.firstNum, problem.secondNum, problem.prevOperator);
 
+    // When result is an actual number:
     if (typeof result === 'number' && !isNaN(result)){
         problem.firstNum = result;
         problem.secondNum = null;
         updateDisplay(result);
+
+    // When result is NOT an actual number, like NaN (when dividing by zero):
     } else {
         updateDisplay('ERROR! Can\'t divide by zero. Press the clear button to continue.');
         problem.firstNum = null;
@@ -101,24 +112,32 @@ function equals(){
     }
 }
 
+
+// ****** OPERATOR BUTTON HANDLING ******
 const operatorButton = document.querySelectorAll('.operatorButton');
 operatorButton.forEach( el => el.addEventListener('click', () => {if (problem.error == false) handleOperatorButtonClick(el)}));
 
 function handleOperatorButtonClick(el){
     const newOperator = el.textContent;
 
+    // When operator buttons are pressed consecutively:
     if (input=='' && problem.prevOperator !== null){
-        let toReplace = problem.prevOperator;
+        let displayText = output.textContent.trim();
+        console.log(displayText);
+
+        if (['+', '-', '*', '/'].includes(displayText.slice(-1))) {
+            displayText = displayText.slice(0, -1) + newOperator;
+        } else {
+            displayText += ' ' + newOperator;
+        }
+
         problem.prevOperator = newOperator;
+        output.textContent = displayText;
 
-        let updatedStr = output.textContent.replace(toReplace, newOperator);
-        output.remove();
-        output.textContent = updatedStr;
-
-        updateDisplay('');
         return;
     }
     
+    // When oeprator button pressed before firstNum as been assigned:
     if (problem.firstNum === null) {
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
@@ -126,12 +145,14 @@ function handleOperatorButtonClick(el){
         input = '';
         return;
     }
+
+    // When operator button pressed after firstNum as been assigned:
     if (input !== ''){
         problem.secondNum = Number(input) || 0;
         equals();
+         problem.prevOperator = newOperator;
+        input = '';
+        updateDisplay(newOperator);
+        return;
     }
-
-    problem.prevOperator = newOperator;
-    input = '';
-    updateDisplay(newOperator);
 }
