@@ -76,6 +76,7 @@ function clear(){
     clearDisplay();
     problem.firstNum = null;
     problem.secondNum = null;
+    problem.prevOperator = null;
     problem.error = false;
 }
 
@@ -104,7 +105,7 @@ function equals(){
 
     // When result is NOT an actual number, like NaN (when dividing by zero):
     } else {
-        updateDisplay('ERROR! Can\'t divide by zero. Press the clear button to continue.');
+        updateDisplay('ERROR! Press the clear button to continue.');
         problem.firstNum = null;
         problem.secondNum = null;
         problem.prevOperator = null;
@@ -121,7 +122,7 @@ function handleOperatorButtonClick(el){
     const newOperator = el.textContent;
 
     // When operator buttons are pressed consecutively:
-    if (input=='' && problem.prevOperator !== null){
+    if (input==='' && problem.prevOperator !== null){
         let displayText = output.textContent.trim();
 
         // When last character of the display is already an operator:
@@ -144,8 +145,8 @@ function handleOperatorButtonClick(el){
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
 
-        // When zero has been assigned to firstNum:
-        (problem.firstNum === 0) ? updateDisplay(problem.firstNum + ' ' + newOperator): updateDisplay(newOperator);
+        // When zero has been assigned to firstNum (or in other words, input was an empty string):
+        (input === '') ? updateDisplay(problem.firstNum + ' ' + newOperator): updateDisplay(newOperator);
         input = '';
         return;
     }
