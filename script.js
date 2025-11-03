@@ -100,7 +100,7 @@ function equals(){
     if (typeof result === 'number' && !isNaN(result)){
         problem.firstNum = result;
         problem.secondNum = null;
-        updateDisplay(result);
+        updateDisplay(Number(result.toFixed(3)));
 
     // When result is NOT an actual number, like NaN (when dividing by zero):
     } else {
@@ -123,7 +123,6 @@ function handleOperatorButtonClick(el){
     // When operator buttons are pressed consecutively:
     if (input=='' && problem.prevOperator !== null){
         let displayText = output.textContent.trim();
-        console.log(displayText);
 
         // When last character of the display is already an operator:
         if (['+', '-', '*', '/'].includes(displayText.slice(-1))) {
@@ -155,8 +154,10 @@ function handleOperatorButtonClick(el){
     if (input !== ''){
         problem.secondNum = Number(input) || 0;
         equals();
-         problem.prevOperator = newOperator;
+
+        problem.prevOperator = newOperator;
         input = '';
+        
         updateDisplay(newOperator);
         return;
     }
