@@ -70,7 +70,7 @@
     height: 100%;
 }
 
-.calculatorButton, .operatorButton, #clearButton{
+.calculatorButton, .operatorButton, #clearButton, .placeHolderButton{
     aspect-ratio: 1 / 1;
     width: 100%;
     border-radius: 50%;
