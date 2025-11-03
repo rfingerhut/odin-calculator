@@ -17,7 +17,7 @@ function divide(a,b){
 const problem = {
     firstNum:null,
     secondNum:null,
-    operator:null,
+    // operator:null,
     prevOperator: null,
 }
 
@@ -60,7 +60,7 @@ function clear(){
     clearDisplay();
     problem.firstNum = null;
     problem.secondNum = null;
-    problem.operator = null;
+    // problem.operator = null;
 }
 
 
@@ -104,7 +104,7 @@ operatorButton.forEach( el => el.addEventListener('click', () => handleOperatorB
 function handleOperatorButtonClick(el){
     const newOperator = el.textContent;
 
-    if (!problem.firstNum) {
+    if (problem.firstNum === null) {
         problem.firstNum = Number(input) || 0;
         problem.prevOperator = newOperator;
         updateDisplay(newOperator);
@@ -115,7 +115,7 @@ function handleOperatorButtonClick(el){
         problem.secondNum = Number(input);
         equals();
     }
-    
+
     problem.prevOperator = newOperator;
     input = '';
     updateDisplay(newOperator);
